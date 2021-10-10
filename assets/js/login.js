@@ -1,12 +1,12 @@
-$(function() {
+$(function () {
   // 点击“去注册账号”的链接
-  $('#link_reg').on('click', function() {
+  $('#link_reg').on('click', function () {
     $('.login-box').hide()
     $('.reg-box').show()
   })
 
   // 点击“去登录”的链接
-  $('#link_login').on('click', function() {
+  $('#link_login').on('click', function () {
     $('.login-box').show()
     $('.reg-box').hide()
   })
@@ -19,7 +19,7 @@ $(function() {
     // 自定义了一个叫做 pwd 校验规则
     pwd: [/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'],
     // 校验两次密码是否一致的规则
-    repwd: function(value) {
+    repwd: function (value) {
       // 通过形参拿到的是确认密码框中的内容
       // 还需要拿到密码框中的内容
       // 然后进行一次等于的判断
@@ -32,7 +32,7 @@ $(function() {
   })
 
   // 监听注册表单的提交事件
-  $('#form_reg').on('submit', function(e) {
+  $('#form_reg').on('submit', function (e) {
     // 1. 阻止默认的提交行为
     e.preventDefault()
     // 2. 发起Ajax的POST请求
@@ -40,7 +40,7 @@ $(function() {
       username: $('#form_reg [name=username]').val(),
       password: $('#form_reg [name=password]').val()
     }
-    $.post('/api/reguser', data, function(res) {
+    $.post('/api/reguser', data, function (res) {
       if (res.status !== 0) {
         return layer.msg(res.message)
       }
@@ -68,6 +68,20 @@ $(function() {
         localStorage.setItem('token', res.token)
         // 跳转到后台主页
         location.href = '/index.html'
+
+  // // origin:zou
+  // $('#formlogin').on('submit', function (e) {
+  //   e.preventDefault()
+  //   let data = Layui.form.val("f1")
+  //   $.post('/api/login', data, function (res) {
+  //     if()
+  //     layui.layer.msg(res.message, {
+  //       icon: 1,
+  //       time: 2000 //2秒关闭（如果不配置，默认是3秒）
+  //     }, function () {
+  //       sessionStorage.setItem('token', res.token)
+  //       location.replace('/index.html')
+  //     })
       }
     })
   })
